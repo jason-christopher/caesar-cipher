@@ -1,16 +1,15 @@
 def encrypt(string, shift):
     result = ""
     for char in string:
-        capital = True if char.isupper() else False
-        new_shift = ord(char.upper()) + (shift % 26)
+        lower = 32 if char.islower() else 0
+        new_shift = ord(char.upper()) + (shift % 26) + lower
         if char.isalpha():
-            if new_shift < 65:
-                add = chr(new_shift + 26)
-            elif new_shift > 90:
-                add = chr(new_shift - 26)
+            if new_shift < 65 + lower:
+                result += chr(new_shift + 26)
+            elif new_shift > 90 + lower:
+                result += chr(new_shift - 26)
             else:
-                add = chr(new_shift)
-            result += add if capital else add.lower()
+                result += chr(new_shift)
         else:
             result += char
     return result
