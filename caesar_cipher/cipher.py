@@ -1,3 +1,20 @@
+import nltk    # pip install nltk
+import ssl
+import re
+from nltk.corpus import words, names
+nltk.download("words", quiet=True)
+nltk.download("names", quiet=True)
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    # Legacy Python that doesn't verify HTTPS certificates by default
+    pass
+else:
+    # Handle target environment that doesn't support HTTPS verification
+    ssl._create_default_https_context = _create_unverified_https_context
+
+
 def encrypt(string, shift):
     result = ""
     for char in string:
@@ -20,30 +37,14 @@ def decrypt(string, shift):
 
 
 def crack(string):
-    # result = string in stopwords.words('english')
-    # print(result)
-    # return result
-    pass
-
-
-# doc strings to add later, they make it too messy right now...
-    # """
-    # Used for a encrypting AND decrypting a Caesar Cipher.
-    # :param string: String that will be encrypted or decrypted.
-    # :param shift: Can be a positive (for encrypting) or negative (for decrypting) integer.
-    # :return: Returns the input string, but every letter will be shifted. Non-letter characters will remain the same.
-    # """
-    #
-    # """
-    # Passes the input parameters to the encrypt function to decrypt.
-    # :param string: String that will be decrypted.
-    # :param shift: Usually a positive integer (but could be negative). The input is converted to a negative value.
-    # :return: Returns the decrypted string.
-    # """
-
-# stuff that didn't work for the crack function...
-# import nltk
-# # from nltk.corpus import words
-# from nltk.corpus import stopwords
-#
-# # pip install nltk
+    for i in range(25):
+        attempt = encrypt(string, i)
+        word_list = attempt.split()
+        count = 0
+        for word in word_list:
+            word = re.sub(r"[^A-Za-z]+", "", word)
+            if word.lower() in words.words() or word.lower() in names.words():
+                count += 1
+        if count / len(word_list) > 0.9:
+            return attempt
+    return ""

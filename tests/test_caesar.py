@@ -70,9 +70,3 @@ def test_crack_nonsense():
     expected = ""
     assert actual == expected
 
-
-def test_crack():
-    phrase = "the"
-    actual = crack(phrase)
-    expected = True
-    assert actual == expected
