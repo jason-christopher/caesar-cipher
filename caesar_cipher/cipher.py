@@ -1,35 +1,50 @@
-def encrypt(string, shift_input):
-    shift = shift_input % 26
+def encrypt(string, shift):
     result = ""
     for char in string:
-        if char.isupper():
-            new_num = ord(char) + shift
-            if new_num < 65:
-                result += chr(new_num + 26)
-            if new_num > 90:
-                result += chr(new_num - 26)
+        capital = True if char.isupper() else False
+        new_shift = ord(char.upper()) + (shift % 26)
+        if char.isalpha():
+            if new_shift < 65:
+                add = chr(new_shift + 26)
+            elif new_shift > 90:
+                add = chr(new_shift - 26)
             else:
-                result += chr(new_num)
-        elif char.islower():
-            new_num = ord(char) + shift
-            if new_num < 97:
-                result += chr(new_num + 26)
-            if new_num > 122:
-                result += chr(new_num - 26)
-            else:
-                result += chr(new_num)
+                add = chr(new_shift)
+            result += add if capital else add.lower()
         else:
             result += char
     return result
 
 
-def decrypt(string, shift_input):
-    shift = shift_input % 26
-    result = encrypt(string, shift*(-1))
-    return result
+def decrypt(string, shift):
+    return encrypt(string, shift*(-1))
 
 
 def crack(string):
+    # result = string in stopwords.words('english')
+    # print(result)
+    # return result
     pass
 
 
+# doc strings to add later, they make it too messy right now...
+    # """
+    # Used for a encrypting AND decrypting a Caesar Cipher.
+    # :param string: String that will be encrypted or decrypted.
+    # :param shift: Can be a positive (for encrypting) or negative (for decrypting) integer.
+    # :return: Returns the input string, but every letter will be shifted. Non-letter characters will remain the same.
+    # """
+    #
+    # """
+    # Passes the input parameters to the encrypt function to decrypt.
+    # :param string: String that will be decrypted.
+    # :param shift: Usually a positive integer (but could be negative). The input is converted to a negative value.
+    # :return: Returns the decrypted string.
+    # """
+
+# stuff that didn't work for the crack function...
+# import nltk
+# # from nltk.corpus import words
+# from nltk.corpus import stopwords
+#
+# # pip install nltk

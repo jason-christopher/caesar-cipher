@@ -46,6 +46,15 @@ def test_round_trip():
     assert actual == expected
 
 
+def test_round_trip_long():
+    original = "It was the best of times, it was the worst of times."
+    shift = 5
+    encrypted = encrypt(original, shift)
+    actual = decrypt(encrypted, shift)
+    expected = original
+    assert actual == expected
+
+
 def test_crack_phrase():
     phrase = "It was the best of times, it was the worst of times."
     encrypted = encrypt(phrase, 10)
@@ -59,4 +68,11 @@ def test_crack_nonsense():
     encrypted = encrypt(phrase, 10)
     actual = crack(encrypted)
     expected = ""
+    assert actual == expected
+
+
+def test_crack():
+    phrase = "the"
+    actual = crack(phrase)
+    expected = True
     assert actual == expected
