@@ -37,13 +37,13 @@ def decrypt(string, shift):
 
 
 def crack(string):
-    for i in range(25):
+    for i in range(1, 26):
         attempt = encrypt(string, i)
         word_list = attempt.split()
         count = 0
         for word in word_list:
             word = re.sub(r"[^A-Za-z]+", "", word)
-            if word.lower() in words.words() or word.lower() in names.words():
+            if word.lower() in words.words() or word in names.words():
                 count += 1
         if count / len(word_list) > 0.9:
             return attempt

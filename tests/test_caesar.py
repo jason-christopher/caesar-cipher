@@ -31,6 +31,12 @@ def test_with_whitespace():
     assert actual == expected
 
 
+def test_more_than_26_input():
+    actual = encrypt("apples and bananas", 53)
+    expected = "bqqmft boe cbobobt"
+    assert actual == expected
+
+
 def test_with_non_alpha():
     actual = encrypt("Gimme a 1!", 1)
     expected = "Hjnnf b 1!"
@@ -68,5 +74,14 @@ def test_crack_nonsense():
     encrypted = encrypt(phrase, 10)
     actual = crack(encrypted)
     expected = ""
+    assert actual == expected
+
+
+def test_crack_names():
+    phrase = "My name is Jason Daniel Christopher, son of Kelly and Judie Christopher."
+    encrypted = encrypt(phrase, 32)
+    print(encrypted)
+    actual = crack(encrypted)
+    expected = phrase
     assert actual == expected
 
