@@ -25,9 +25,7 @@ Install required packages:
 To run:
 
 * From the `caesar-cipher` directory run `python caesar_cipher/cipher.py`.
-* The first prompt will ask you for the URL of the Wikipedia page you'd like to scrape. Either:
-  * Paste the desired URL (including `https://` header)
-  * Hit the Return key to scrape the default Wikipedia page.
+* The first prompt will ask you whether you want to encrypt (e), decrypt (d), or crack (c) a message. Enter the desired command and follow the follow-on prompts. 
 
 ### Tests
 
