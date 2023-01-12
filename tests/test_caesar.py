@@ -85,3 +85,12 @@ def test_crack_names():
     expected = phrase
     assert actual == expected
 
+
+def test_crack_simple():
+    phrase = "apple and banana"
+    encrypted = encrypt(phrase, 1)
+    print(encrypted)
+    actual = crack(encrypted)
+    expected = phrase
+    assert actual == expected
+
