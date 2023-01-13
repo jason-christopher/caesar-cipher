@@ -45,7 +45,7 @@ def crack(string):
             word = re.sub(r"[^A-Za-z]+", "", word)
             if word.lower() in word_db or word in names_db:
                 count += 1
-        if count / len(word_list) > 0.9:
+        if count / len(word_list) > 0.90:
             return attempt
     return ""
 
